@@ -1,0 +1,276 @@
+\documentclass[11pt, a4paper]{article}
+%% Global libraries
+\usepackage[right=0cm,left=0cm,bottom=0cm,top=0cm]{geometry} % pages borders
+\usepackage[french]{babel} % language type annotations
+
+%% Libraries for graphics and colours
+\usepackage{tikz} % for drawing
+\usepackage{graphicx} % improve include graphics
+\usepackage{lipsum} % for testing
+\usepackage[most]{tcolorbox} % to have fill paterns for TikZ
+\usepackage{changepage} % for adjustwidth command
+\usepackage{xcolor} % to have access to every immaginable color
+\usepackage{colortbl}
+\usepackage{amsmath} % mathematics package
+\usepackage{amssymb} % mathematics symbols
+\usepackage[explicit,pagestyles]{titlesec} % redefine titles style
+\usepackage{mdframed} % permet de couper du texte entre plusieurs pages
+\usepackage{framed}
+\usepackage{titletoc} % redefine toc
+\usepackage{etoolbox} % ?? (used to redefine toc)
+\usepackage{stmaryrd}
+\usepackage{ifthen} % use to make if then conditions
+\usepackage{tikzscale} % in order to scale TikZ pictures
+\usepackage{multicol}
+\usepackage{capt-of}
+\usepackage{xspace}
+\usepackage{array}
+\usepackage[normalem]{ulem}
+\usepackage{url}
+\usepackage{subcaption}
+\usepackage{cite}
+
+%% Other libraries
+\usepackage{eurosym} % in order to have € symbol
+\usepackage{notoccite} % helps for quotations
+\usepackage{float} % helps to place figures
+\usepackage[unicode]{hyperref} % in order to make hyperref links inside doc
+\usepackage{setspace} % in order to help adding space in the document
+\usepackage{longtable} % in order to have multipage tables
+\usepackage{multirow} % in order to use multirow in a table
+\usepackage{pifont} % in order to have checkmarks and crosses
+\usepackage{booktabs} % to have predefined tab rules
+\usepackage{rotating} % to have rotating boxes
+\usepackage{tkz-tab}
+\usepackage{mathrsfs}
+
+
+%% Font recommendations
+\usepackage{fontawesome} % to have web fonts
+\usepackage[math]{kurier} % main font
+\usepackage[T1]{fontenc} % font encoding
+\DeclareTextCommandDefault{\nobreakspace}{\leavevmode\nobreak\ } % Because T1 disable this command, we redefine it
+
+%% TikZ libraries needed to compute
+\usetikzlibrary{fit} 
+\usetikzlibrary{graphs} % package for graphics representation
+\usetikzlibrary{positioning} % possitionning inside TikZ picture
+\usetikzlibrary{arrows} % beautiful arrows with TikZ
+\usetikzlibrary{calc} % enable computation of values insidecture
+\usetikzlibrary{decorations} % decoration for TikZ picture
+
+\definecolor{themeColor}{RGB}{199,16,26}
+\definecolor{vertforet}{RGB}{20,83,20}
+\definecolor{bordeau}{RGB}{199,16,26}
+\definecolor{gris}{RGB}{155,155,155}
+\definecolor{grisp}{RGB}{225,225,225}
+\definecolor{bluenight}{RGB}{0,82,148}
+\definecolor{bluesword}{RGB}{0,82,148}
+\definecolor{violet}{RGB}{112,4,98}
+\definecolor{amber}{RGB}{255,110,0}
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\newlength{\dimBandeau}
+\setlength{\dimBandeau}{5.1cm}
+
+\newlength{\bandeauSpace}
+\setlength{\bandeauSpace}{.3cm}
+
+\newlength{\itemWidth}
+\setlength{\itemWidth}{12.5cm}
+
+\newlength{\competencesHeight}
+\setlength{\competencesHeight}{-10.75cm}
+
+\begin{document}
+\noindent\tikz{%
+  \begin{pgfonlayer}{background}
+    \fill [bluenight] (0,0) rectangle (\dimBandeau,-\the\paperheight);%
+    \path [fill tile image*={width=3cm}{dtx.jpg}] (.5\dimBandeau,-.4\dimBandeau) circle (1.5);%
+  \end{pgfonlayer}
+  \begin{pgfonlayer}{main}
+    % Généralités
+    \node (trait1) [color=bluenight, fill=white, draw, rectangle, minimum width=4.8cm, inner sep=1pt, right] at (.1,-.8\dimBandeau) {};
+    \node (mail) [color=white, inner sep=0pt, outer sep=0pt, text width=4.9cm, align=center] at ([yshift=-2\bandeauSpace]trait1.south) {\textbf{damien.douteaux@gmail.com}};%
+    \node (permis) [color=white, below] at ([yshift=-0.5\bandeauSpace]mail.south) {\textbf{Titulaire du permis B}};%
+    \node (addr1) [color=white] at ([yshift=-\bandeauSpace-0.5cm]permis.south) {\textbf{43 rue du Dr. Albéric Pont}};%
+    \node (addr2) [color=white] at ([yshift=-\bandeauSpace]addr1.south) {\textbf{Bâtiment 5, Allée A}};%
+    \node (addr3) [color=white] at ([yshift=-\bandeauSpace]addr2.south) {\textbf{69 005 \textbf{Lyon}}};%
+    \node (phone) [color=white] at ([yshift=-\bandeauSpace]addr3.south) {\textbf{+33 (0)6.30.14.50.71}};%
+    \node (fixe) [color=white] at ([yshift=-\bandeauSpace]phone.south) {\textbf{+33 (0)4.26.18.04.03}};%
+
+    % Compétences
+    \node (competences) [color=white,right, text width=\dimBandeau, align=center] at (0,\competencesHeight) {{\Large \textbf{Compétences}}};%
+    \node (trait2) [color=bluenight, fill=white, draw, rectangle, minimum width=4.8cm, inner sep=1pt, right] at ([xshift=.1cm,yshift=.25cm]competences.north west) {};
+    \node (trait3) [color=bluenight, fill=white, draw, rectangle, minimum width=4.8cm, inner sep=1pt, right] at ([xshift=.1cm,yshift=-.25cm]competences.south west) {};
+    % Data science
+    \node (datascience) [color=white, text width=\dimBandeau, right] at ([yshift=-2\bandeauSpace]competences.south west) {{\large \textbf{\textsc{Data science}}}};%
+    \node (scikitlearn) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]datascience.south west) {\hspace*{.4cm}\textbf{Scikit Learn}\hfill\faStar\,\faStar\,\faStarHalfEmpty\,\faStarO\,\faStarO\,\phantom{a}};%
+    \node (pandas) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]scikitlearn.south west) {\hspace*{.4cm}\textbf{Pandas}\hfill\faStar\,\faStar\,\faStarHalfEmpty\,\faStarO\,\faStarO\,\phantom{a}};%
+    \node (r) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]pandas.south west) {\hspace*{.4cm}\textbf{R}\hfill\faStar\,\faStar\,\faStar\,\faStarO\,\faStarO\,\phantom{a}};%
+    \node (spacy) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]r.south west) {\hspace*{.4cm}\textbf{SpaCy}\hfill\faStar\,\faStar\,\faStar\,\faStar\,\faStarO\,\phantom{a}};%
+    \node (weka) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]spacy.south west) {\hspace*{.4cm}\textbf{Weka}\hfill\faStar\,\faStar\,\faStar\,\faStarO\,\faStarO\,\phantom{a}};%
+    \node (sparql) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]weka.south west) {\hspace*{.4cm}\textbf{SparQL}\hfill\faStar\,\faStar\,\faStarHalfEmpty\,\faStarO\,\faStarO\,\phantom{a}};%
+    \node (statistique) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]sparql.south west) {\hspace*{.4cm}\textbf{Statistiques}\hfill\faStar\,\faStar\,\faStar\,\faStarO\,\faStarO\,\phantom{a}};%
+    % Langages
+    \node (langages) [color=white, text width=\dimBandeau, right] at ([yshift=-2\bandeauSpace]statistique.south west) {{\large \textbf{\textsc{Langages}}}};%
+    \node (python) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]langages.south west) {\hspace*{.4cm}\textbf{Python}\hfill\faStar\,\faStar\,\faStar\,\faStarO\,\faStarO\,\phantom{a}};%
+    \node (java) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]python.south west) {\hspace*{.4cm}\textbf{JAVA/JEE}\hfill\faStar\,\faStar\,\faStar\,\faStar\,\faStarO\,\phantom{a}};%
+    \node (ccpp) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]java.south west) {\hspace*{.4cm}\textbf{C-C++}\hfill\faStar\,\faStar\,\faStar\,\faStarHalfEmpty\,\faStarO\,\phantom{a}};%
+    \node (cs) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]ccpp.south west) {\hspace*{.4cm}\textbf{C\#}\hfill\faStar\,\faStar\,\faStarO\,\faStarO\,\faStarO\,\phantom{a}};%
+    \node (php) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]cs.south west) {\hspace*{.4cm}\textbf{PHP}\hfill\faStar\,\faStar\,\faStar\,\faStarO\,\faStarO\,\phantom{a}};%
+    % Compétences web
+    \node (web) [color=white, text width=\dimBandeau, right] at ([yshift=-3\bandeauSpace]php.south west) {{\large \textbf{\textsc{Web}}}};%
+    \node (js) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]web.south west) {\hspace*{.4cm}\textbf{Javascript}\hfill\faStar\,\faStar\,\faStar\,\faStar\,\faStarO\,\phantom{a}};%
+    \node (htmlcss) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]js.south west) {\hspace*{.4cm}\textbf{HTML-CSS}\hfill\faStar\,\faStar\,\faStar\,\faStar\,\faStarO\,\phantom{a}};%
+    \node (rails) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]htmlcss.south west) {\hspace*{.4cm}\textbf{Rails}\hfill\faStar\,\faStar\,\faStar\,\faStarHalfEmpty\,\faStarO\,\phantom{a}};%
+    \node (nodejs) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]rails.south west) {\hspace*{.4cm}\textbf{Node JS}\hfill\faStar\,\faStar\,\faStarO\,\faStarO\,\faStarO\,\phantom{a}};%
+    % Divers
+    \node (autre) [color=white, text width=\dimBandeau, right] at ([yshift=-2\bandeauSpace]nodejs.south west) {{\large \textbf{\textsc{Divers}}}};%
+    \node (latex) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]autre.south west) {\hspace*{.4cm}\textbf{\LaTeX}\hfill\faStar\,\faStar\,\faStar\,\faStar\,\faStarHalfEmpty\,\phantom{a}};%
+    \node (keycloak) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]latex.south west) {\hspace*{.4cm}\textbf{Keycloak}\hfill\faStar\,\faStar\,\faStar\,\faStar\,\faStarO\,\phantom{a}};%
+    \node (es) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]keycloak.south west) {\hspace*{.4cm}\textbf{Stack ELK}\hfill\faStar\,\faStar\,\faStar\,\faStarO\,\faStarO\,\phantom{a}};%
+    \node (sinequa) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]es.south west) {\hspace*{.4cm}\textbf{Sinequa}\hfill\faStar\,\faStar\,\faStar\,\faStarHalfEmpty\,\faStarO\,\phantom{a}};%
+    \node (linux) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]sinequa.south west) {\hspace*{.4cm}\textbf{Linux}\hfill\faStar\,\faStar\,\faStar\,\faStarO\,\faStarO\,\phantom{a}};%
+    \node (sql) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]linux.south west) {\hspace*{.4cm}\textbf{SQL}\hfill\faStar\,\faStar\,\faStar\,\faStarO\,\faStarO\,\phantom{a}};%
+    \node (algo) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]sql.south west) {\hspace*{.4cm}\textbf{Algorithmie}\hfill\faStar\,\faStar\,\faStar\,\faStarHalfEmpty\,\faStarO\,\phantom{a}};%
+    %\node (office) [color=white, text width=\dimBandeau, right] at ([yshift=-\bandeauSpace]algo.south west) {\hspace*{.4cm}\textbf{MS Office}\hfill\faStar\,\faStar\,\faStar\,\faStarHalfEmpty\,\faStarO\,\phantom{a}};%
+  \end{pgfonlayer}
+}
+\tikz{%
+  %%%%%% 
+  %%%%%% IDENTITE ET OBJECTIFS
+  %%%%%% 
+  \node (id) [color=bluenight, text width=\textwidth, right] at (0,0) {{\Huge \textcolor{bluenight}{\textbf{Damien \textsc{Douteaux}}}}};%
+  \node (but) [color=grisp, text width=\textwidth] at ([yshift=-.75cm]id.south) {{\huge \textcolor{gris}{\textit{Recherche de poste de Data Scientist}}}};%
+
+  %%%%%% 
+  %%%%%% FORMATION
+  %%%%%% 
+
+  % Centrale
+  \node (formation) [color=bluenight] at ([xshift=3cm,yshift=-0.75cm]but.south west) {{\Large \textbf{Formation}}};%
+  \fill [bluenight] ([xshift=-.5cm]formation.west) circle (.25cm);%
+  \node (centrale) [color=black, text width=\itemWidth, below right] at ([xshift=.5cm,yshift=-.25cm]formation.south west) {\textbf{Ingénieur généraliste spécialisé en informatique et data science}\newline\hspace*{.5cm}\textit{\'Ecole Centrale de Lyon}, \'Ecully. Félicitations sur le tronc commun.};%
+  \node (centraleDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, align=center] at ([xshift=-.5cm,yshift=-.5cm]formation.south west) {\textbf{2013-17}};%
+
+  % Master
+  \node (master) [color=black, text width=\itemWidth, below right] at (centrale.south west) {\textbf{Master Data Science}\newline\hspace*{.5cm}\textit{Université Claude Bernard Lyon 1}, Lyon.};%
+  \path let \p1 = (centraleDate.south), \p2 = (master.north west) in coordinate (posMasterDate) at (\x1,\y2);
+  \node (masterDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, below, align=center] at (posMasterDate) {\textbf{2016-17}};%
+
+  % Prépa
+  \node (prepa) [color=black, text width=\itemWidth, below right] at (master.south west) {\textbf{Classes préparatoires MPSI et MP\raisebox{.15cm}[0pt]{\textasteriskcentered}}\newline\hspace*{.5cm}\textit{Lycée du Parc}, Lyon. Mathématiques, physique et informatique.};%
+  \path let \p1 = (centraleDate.south), \p2 = (prepa.north west) in coordinate (posPrepaDate) at (\x1,\y2);
+  \node (prepaDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, below, align=center] at (posPrepaDate) {\textbf{2011-13}};%
+
+  % Lycée
+  \node (lycee) [color=black, text width=\itemWidth, below right] at (prepa.south west) {\textbf{Baccalauréat général scientifique}\newline\hspace*{.5cm}\textit{Lycée Montchapet}, Dijon. Mention très bien et félicitations du jury.};%
+  \path let \p1 = (prepaDate.south), \p2 = (lycee.north west) in coordinate (posLycDate) at (\x1,\y2);
+  \node (lyceeDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, below, align=center] at (posLycDate) {\textbf{2008-11}};%
+
+  %%%%%% 
+  %%%%%% EXPERIENCES PRO
+  %%%%%% 
+  \node (expPro) [color=bluenight, right] at ([xshift=-.5cm,yshift=-.6cm]lycee.south west) {{\Large \textbf{Expériences professionnelles}}};%
+  \fill [bluenight] ([xshift=-.5cm]expPro.west) circle (.25cm);%
+
+  % SWORD emploi
+  \node (sword2) [color=black, text width=\itemWidth, below right, align=justify] at ([xshift=.5cm,yshift=-.25cm]expPro.south west) {\textbf{Ingénieur machine learning et moteur de recherche}, \textit{SWORD}, Lyon.\newline\hspace*{.5cm}\parbox[t]{12cm}{\textcolor{bluenight}{$\bullet$~~}\textbf{Projet Oncosnipe/ConSoRe :} Développement d'un service de TALN pour extraire des concepts en cancérologie à partir de comptes rendus patients. Détection de la résistance aux traitements et des toxicités.\\
+  \textcolor{bluenight}{$\bullet$~~}\textbf{Projet Saint-Gobain :} intégration de moteurs de recherche (Sinequa)\\
+  \textcolor{bluenight}{$\bullet$~~}\textbf{Projet STIF :} intégration d'une solution d'authentification (Keycloak)}};%
+  \node (sword2Date) [text width=1.6cm, color=white, fill=bluenight, rounded corners, align=center] at ([xshift=-.5cm,yshift=-.5cm]expPro.south west) {\textbf{2017-19}};%
+
+  % Luxembourg
+  \node (snt) [color=black, text width=\itemWidth, below right, align=justify] at (sword2.south west) {\textbf{Stage de recherche en data science}, \textit{SNT Laboratory}, Luxembourg.\newline\hspace*{.5cm}\parbox[t]{12cm}{Étude de solutions de programmation probabiliste pour détecter des transactions banquaires frauduleuses.}};%
+  \path let \p1 = (sword2Date.south), \p2 = (snt.north west) in coordinate (posSntDate) at (\x1,\y2);
+  \node (sntDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, below, align=center] at (posSntDate) {\textbf{2017}};%
+  
+  % Deepidoo
+  \node (deepidoo) [color=black, text width=\itemWidth, below right, align=justify] at (snt.south west) {\textbf{Stage développeur web et R\&D}, \textit{Deepidoo}, Lyon.\newline\hspace*{.5cm}\parbox[t]{12cm}{Développement d'un outil de segmentation d'écran pour lire différents contenus et refonte de la stratégie de sélection de musiques.}};%
+  \path let \p1 = (sntDate.south), \p2 = (deepidoo.north west) in coordinate (posDeepidooDate) at (\x1,\y2);
+  \node (deepidooDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, below, align=center] at (posDeepidooDate) {\textbf{2016}};%
+
+  % SWORD
+  \node (sword) [color=black, text width=\itemWidth, below right, align=justify] at (deepidoo.south west) {\textbf{Stage d'extraction de connaissance}, \textit{SWORD}, Lyon.\newline\hspace*{.5cm}\parbox[t]{12cm}{\textcolor{bluenight}{$\bullet$~~}\textbf{Projet ConSoRe : }Établissement de règles de raisonnement et d'extraction d'informations de compte-rendus de patients en cancérologie. Création du modèle et stockage des données dans un triplestore.\\
+  \textcolor{bluenight}{$\bullet$~~}\textbf{Projet ADSN : }Initialisation d'une chaîne d'extraction des données d'actes notariés.}};%
+  \path let \p1 = (deepidooDate.south), \p2 = (sword.north west) in coordinate (posSwordDate) at (\x1,\y2);
+  \node (swordDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, below, align=center] at (posSwordDate) {\textbf{2015}};%
+
+  % PERSEUS
+  \node (perseus) [color=black, text width=\itemWidth, below right, align=justify] at (sword.south west) {\textbf{Projet scolaire en électronique}, \textit{\'Ecole Centrale Lyon et CNES}.\newline\hspace*{.5cm}\parbox[t]{12cm}{Conception d'un module de commande de vannes d'alimentation en ergol pour moteur de fusée. Projet de deuxième année par équipe de cinq avec le CNES et PERSEUS (Projet \'Etudiant de Recherche Spatiale).}};%
+  \path let \p1 = (swordDate.south), \p2 = (perseus.north west) in coordinate (posPerseusDate) at (\x1,\y2);
+  \node (perseusDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, below, align=center] at (posPerseusDate) {\textbf{2014-15}};%
+
+  % MFC
+  \node (pile) [color=black, text width=\itemWidth, below right, align=justify] at (perseus.south west) {\textbf{Projet scolaire en électrochimie}, \textit{\'Ecole Centrale Lyon, laboratoire Ampère}.\newline\hspace*{.5cm}\parbox[t]{12cm}{Réalisation d'une pile à combustible microbienne intégrable dans des canalisations. Projet de première année par équipe de cinq.\newline\hspace*{.5cm}\textcolor{bluenight}{$\bullet$~~}Prix du meilleur projet de l'école en 2014.\newline\hspace*{.5cm}\textcolor{bluenight}{$\bullet$~~}Participation aux Fêtes de la Science 2014.}};
+  \path let \p1 = (perseusDate.south), \p2 = (pile.north west) in coordinate (posPileDate) at (\x1,\y2);
+  \node (pileDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, below, align=center] at (posPileDate) {\textbf{2013-14}};%
+
+  % TIPE
+  \node (tipe) [color=black, text width=\itemWidth, below right, align=justify] at (pile.south west) {\textbf{Projet scolaire en informatique}, \textit{Lycée du Parc}.\newline\hspace*{.5cm}\parbox[t]{12cm}{Détection de contours sur une image.}};
+  \path let \p1 = (pileDate.south), \p2 = (tipe.north west) in coordinate (posTipeDate) at (\x1,\y2);
+  \node (tipeDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, below, align=center] at (posTipeDate) {\textbf{2011-12}};%
+  
+  % Cours
+  \node (cours) [color=black, text width=\itemWidth, below right, align=justify] at (tipe.south west) {\textbf{Cours particuliers de mathématiques}, \textit{Auprès de particuliers}.\newline\hspace*{.5cm}\parbox[t]{12cm}{Cours réalisés pour des élèves de collège et de lycée à Dijon et Lyon.}};
+  \path let \p1 = (tipeDate.south), \p2 = (cours.north west) in coordinate (posCoursDate) at (\x1,\y2);
+  \node (coursDate) [text width=1.6cm, color=white, fill=bluenight, rounded corners, below, align=center] at (posCoursDate) {\textbf{2010-16}};%
+
+  %%%%%% 
+  %%%%%% LANGUES
+  %%%%%% 
+  \node (langues) [color=bluenight, right] at ([xshift=-.5cm,yshift=-.6cm]cours.south west) {{\Large \textbf{Langues}}};%
+  \fill [bluenight] ([xshift=-.5cm]langues.west) circle (.25cm);%
+
+  % Anglais
+  \node (anglais) [color=black, text width=\itemWidth, below right] at ([xshift=.5cm,yshift=-.25cm]langues.south west) {\textbf{TOEFL INS 623}, conversation et lecture courantes. 6 mois à l'international (Luxembourg) puis oral et rapport de fin d'étude en anglais.};%
+  \node (anglaisLabel) [text width=1.6cm, text depth=.2ex, color=white, fill=bluenight, rounded corners, align=center] at ([xshift=-.5cm,yshift=-.5cm]langues.south west) {\textbf{Anglais}};%
+
+  % Chinois
+  \node (chinois) [color=black, text width=\itemWidth, below right] at ([yshift=-0.25cm]anglais.south west) {\textbf{Bases}, mots et phrases basiques.};%
+  \path let \p1 = (anglaisLabel.south), \p2 = ([yshift=0.25cm]chinois.north west) in coordinate (posChinoisLabel) at (\x1,\y2);
+  \node (chinoisLabel) [text width=1.6cm, text depth=3.2ex, color=white, fill=bluenight, rounded corners, below, align=center] at (posChinoisLabel) {\textbf{Chinois}\\\textbf{Espagnol}};%
+
+  % Espagnol
+  % \node (espagnol) [color=black, text width=\itemWidth, below right] at (chinois.south west) {};%
+  % \path let \p1 = (chinoisLabel.south), \p2 = (espagnol.north west) in coordinate (posEspagnolLabel) at (\x1,\y2);
+  % \node (espagnolLabel) [text width=1.6cm, text depth=.2ex, color=white, fill=bluenight, rounded corners, below] at (posEspagnolLabel) {\textbf{Espagnol}};%
+
+  %%%%%% 
+  %%%%%% CENTRES D'INTERET
+  %%%%%% 
+  \fill [white] ([yshift=-.7cm]chinois.south) circle (.25cm);%
+  % \node (interet) [color=bluenight, right] at ([xshift=-.5cm,yshift=-1cm]espagnol.south west) {{\Large \textbf{Centres d'intérêt}}};%
+  % \fill [bluenight] ([xshift=-.5cm]interet.west) circle (.25cm);%
+
+  % % Pain
+  % \node (pain) [color=black, text width=\itemWidth, below right] at ([xshift=.5cm,yshift=-.25cm]interet.south west) {\textbf{Boulangerie}, confection de pains et viennoiseries.};%
+  % \fill [bluenight] ([xshift=-1cm]pain.west) circle (.1cm);
+
+  % % Dessin
+  % \node (dessin) [color=black, text width=\itemWidth, below right] at (pain.south west) {\textbf{Dessin}, ancien dessinateur pour le journal de l'école.};%
+  % \fill [bluenight] ([xshift=-1cm]dessin.west) circle (.1cm);
+
+  % % Vélo
+  % \node (velo) [color=black, text width=\itemWidth, below right] at (dessin.south west) {\textbf{Vélo}, moyen de transport et loisir.};%
+  % \fill [bluenight] ([xshift=-1cm]velo.west) circle (.1cm);
+
+  % \node (white) at (velo.south) {\rule{0cm}{2cm}};
+
+  \begin{pgfonlayer}{background}
+    \fill [bluenight] ([xshift=-.52cm]formation.west) rectangle ([xshift=.02cm]lyceeDate);
+    \fill [bluenight] ([xshift=-.52cm]expPro.west) rectangle ([xshift=.02cm]coursDate);
+    \fill [bluenight] ([xshift=-.52cm]langues.west) rectangle ([xshift=.02cm]chinoisLabel);
+%    \fill [bluenight] ([xshift=-.52cm]interet.west) rectangle ([xshift=-.98cm]velo.west);
+  \end{pgfonlayer}
+}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
